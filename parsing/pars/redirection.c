@@ -8,6 +8,20 @@ int	check_rd(char c)
 	return (0);
 }
 
+int	check_rd1(char c)
+{
+	if (c == '>' || c == '<')
+		return (1);
+	return (0);
+}
+
+int	check_sp(char c)
+{
+	if (c == ' ' || c == '\t')
+		return (1);
+	return (0);
+}
+
 int	count_redirection(char *cmd)
 {
 	int	i;
@@ -116,17 +130,22 @@ void	redirection_files(t_bash *bash, int i)
 	x = 0;
 	while (bash->s_cmd[i]->command[j])
 	{
-		if (bash->s_cmd[i]->command[j] == '>' 
-			|| bash->s_cmd[i]->command[j] == '<')
+		if (check_rd1(bash->s_cmd[i]->command[j]))
 		{
-			if (check_rd(bash->s_cmd[i]->command[j]))
+			if (check_rd1(bash->s_cmd[i]->command[j]))
 				j += 2;
 			else
 				j++;
-			
-
+			while (check_sp(bash->s_cmd[i]->command[j]))
+				j++;
+			start = j;
+			while (!check_rd(bash->s_cmd[i]->command[j]))
+				j++;
+			bash->s_cmd[i]->s_red[x]->file = ft_substr(bash->s_cmd[i]->command, start, i - start);
+			x++;
 		}
-
+		else
+			j++;
 	}
 }
 
