@@ -100,6 +100,7 @@ void	select_struct(t_bash *bash)
 	if (!select_struct3(bash))
 		return ;
 	check_red_env(bash);
+	parse_redirection(bash);
 }
 
 int	main()
