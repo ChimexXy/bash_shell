@@ -6,8 +6,10 @@ char	*ft_strdup(char *cmd)
 	char *ret;
 
 	i = 0;
-	ret = malloc(sizeof(char) * ft_strlen(cmd) + 1);
 	if (!cmd)
+		return (NULL);
+	ret = malloc(sizeof(char) * ft_strlen(cmd) + 1);
+	if (!ret)
 		return (NULL);
 	while(cmd[i])
 	{

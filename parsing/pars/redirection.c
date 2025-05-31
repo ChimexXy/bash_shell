@@ -132,7 +132,7 @@ void	redirection_files(t_bash *bash, int i)
 	{
 		if (check_rd1(bash->s_cmd[i]->command[j]))
 		{
-			if (check_rd1(bash->s_cmd[i]->command[j]))
+			if (check_rd1(bash->s_cmd[i]->command[j + 1]))
 				j += 2;
 			else
 				j++;
@@ -141,7 +141,7 @@ void	redirection_files(t_bash *bash, int i)
 			start = j;
 			while (!check_rd(bash->s_cmd[i]->command[j]))
 				j++;
-			bash->s_cmd[i]->s_red[x]->file = ft_substr(bash->s_cmd[i]->command, start, i - start);
+			bash->s_cmd[i]->s_red[x]->file = ft_substr(bash->s_cmd[i]->command, start, j - start);
 			x++;
 		}
 		else

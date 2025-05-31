@@ -1,5 +1,24 @@
 #include "../../inc/minishell.h"
 
+int	check_env(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str[i] == '=')
+	{
+		printf("minishell: export: `=': not a valid identifier\n");
+		return (0);
+	}
+	while (str[i])
+	{
+		if(str[i] == '=')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 int count_env(char *str)
 {
 	int i;
@@ -33,10 +52,40 @@ int alloc_env(t_bash *bash, int num_env, int ind)
 		bash->s_cmd[ind]->s_env[i]->value = NULL;
 		i++;
 	}
+	bash->s_cmd[ind]->s_env[num_env] = NULL;
 	return (1);
 }
 
-int parse_env(t_bash *bash)
+void	parse_env_file_key(t_bash *bash, int i)
+{
+	int j;
+	int m;
+	int x;
+	int len;
+
+	j = 0;
+	x = 0;
+	while (bash->s_cmd[i]->arguments[j])
+	{
+		m = 0;
+		if (check_env(bash->s_cmd[i]->arguments[j]))
+		{
+			len = ft_strlen(bash->s_cmd[i]->arguments[j]);
+			while(bash->s_cmd[i]->arguments[j][m] != '=')
+				m++;
+			bash->s_cmd[i]->s_env[x]->key = ft_substr(bash->s_cmd[i]->arguments[j], 0, m);
+			m++;
+			if (m >= len)
+				bash->s_cmd[i]->s_env[x]->value = ft_strdup("");
+			else
+				bash->s_cmd[i]->s_env[x]->value = ft_substr(bash->s_cmd[i]->arguments[j], m, len - m);
+			x++;
+		}
+		j++;
+	}
+}
+
+int parse_envirement(t_bash *bash)
 {
 	int i;
 	int num_env;
@@ -51,7 +100,7 @@ int parse_env(t_bash *bash)
 			{
 				if (alloc_env(bash, num_env, i) == 0)
 					return (0);
-				parse_env_entries(bash, i);
+				parse_env_file_key(bash, i);
 			}
 		}
 		i++;

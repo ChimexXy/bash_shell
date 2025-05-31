@@ -101,6 +101,7 @@ void	select_struct(t_bash *bash)
 		return ;
 	check_red_env(bash);
 	parse_redirection(bash);
+	parse_envirement(bash);
 }
 
 int	main()
@@ -112,15 +113,18 @@ int	main()
 	{
 		select_struct(bash);
 		int i = 0;
-		while(bash->s_cmd[i])
+		while(i < bash->num_cmd)
 		{
 			int j = 0;
-			while(bash->s_cmd[i]->arguments[j])
+			if (bash->s_cmd[i]->s_env)
 			{
-				printf("command num %d : %s\n", i, bash->s_cmd[i]->arguments[j]);
-				j++;
+				while(bash->s_cmd[i]->s_env[j])
+				{
+					printf("env num %d key: %s\n", j, bash->s_cmd[i]->s_env[j]->key);
+					printf("env num %d value: %s\n", j, bash->s_cmd[i]->s_env[j]->value);
+					j++;
+				}
 			}
-			// printf("command num %d : %s\n", i, bash->s_cmd[i]->command);
 			i++;
 		}
 	}
