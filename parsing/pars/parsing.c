@@ -68,8 +68,8 @@ int	select_struct2(t_bash *bash)
 	bash->s_cmd[i] = NULL;
 	if (!red_parse(bash))
 	{
-        printf("bash: syntax error near unexpected token `newline'\n");
-        free_cmd_array(bash);
+        printf("minishell: syntax error near unexpected token `newline'\n");
+        // free_cmd_array(bash);
 		return (0);
 	}
 	return (1);
@@ -113,15 +113,15 @@ int	main()
 	{
 		select_struct(bash);
 		int i = 0;
-		while(i < bash->num_cmd)
+		while(bash->s_cmd[i])
 		{
 			int j = 0;
-			if (bash->s_cmd[i]->s_env)
+			if (bash->s_cmd[i]->s_red)
 			{
-				while(bash->s_cmd[i]->s_env[j])
+				while(bash->s_cmd[i]->s_red[j])
 				{
-					printf("env num %d key: %s\n", j, bash->s_cmd[i]->s_env[j]->key);
-					printf("env num %d value: %s\n", j, bash->s_cmd[i]->s_env[j]->value);
+					printf("env num %d file: %s\n", j, bash->s_cmd[i]->s_red[j]->file);
+					printf("env num %d type: %u\n", j, bash->s_cmd[i]->s_red[j]->type);
 					j++;
 				}
 			}
