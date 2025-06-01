@@ -40,6 +40,32 @@ int	check_cmd1(char *str)
 	return (1);
 }
 
+int	check_cmd2(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '|')
+		{
+			i++;
+			if (!str[i])
+				return (0);
+			while(str[i] == ' ')
+				i++;
+			if(str[i] == '|' || str[i] == '\0')
+			{
+				printf("bash: syntax error near unexpected token `|'\n");
+				return (0);
+			}
+		}
+		else
+			i++;
+	}
+	return (1);
+}
+
 int	count_pipes(char *cmd)
 {
 	int	i;
