@@ -29,7 +29,8 @@ int	select_struct1(t_bash *bash)
 	char *cmd;
 
 	cmd = readline("minishell$ ");
-	if(!cmd || !check_cmd(cmd) || !check_cmd1(cmd))
+	if(!cmd || !check_cmd(cmd) || 
+		!check_cmd1(cmd) || !check_cmd2(cmd))
 	{
 		// bash->num_cmd = 0;
 		free(cmd);

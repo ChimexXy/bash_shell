@@ -22,7 +22,7 @@ typedef enum x_type
 	OUTPUT,      // >
 	HERE_DOC,    // <<
 	APPEND,      // >>
-	DOLLAR_SIGN, // $
+	// DOLLAR_SIGN, // $
 }			t_type;
 
 typedef struct x_red
@@ -111,6 +111,13 @@ void	redirection_types(t_bash *bash, int i);
 void	redirection_types1(t_bash *bash, int i);
 void	redirection_files(t_bash *bash, int i);
 int		parse_redirection(t_bash *bash);
+
+//->envirement:
+
+int 	count_env(char *str);
+int 	alloc_env(t_bash *bash, int num_env, int ind);
+void	parse_env_file_key(t_bash *bash, int i);
+int 	parse_envirement(t_bash *bash);
 
 //->utils(libft)
 
