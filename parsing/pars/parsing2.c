@@ -62,6 +62,7 @@ int	check_cmd3(char *str)
 			if((str[i] == '>' && str[i + 1] == '>')
 				|| (str[i] == '<' && str[i + 1] == '<'))
 				return (0);
+				
 		}
 	}
 }
