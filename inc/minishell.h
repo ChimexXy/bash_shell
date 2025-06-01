@@ -82,6 +82,8 @@ void	select_struct(t_bash *bash);
 
 int		check_cmd(char *str);
 int		check_cmd1(char *str);
+int		check_cmd2(char *str);
+int		check_cmd3(char *str);
 int		count_pipes(char *cmd);
 int		red_parse(t_bash *bash);
 
@@ -91,6 +93,8 @@ int		red_parse(t_bash *bash);
 int		check_envirment(char *str);
 int		check_redirection(char *str);
 void	check_red_env(t_bash *bash);
+int		check_cmd4_1(char *str);
+int		check_cmd4_2(char *str);
 
 //->tokrnizer
 

@@ -2,6 +2,8 @@
 
 int	check_rd(char c)
 {
+	if (!c)
+		return (0);
 	if (c == '>' || c == '<' 
 		|| c == ' ' || c == '\t')
 		return (1);
@@ -10,6 +12,8 @@ int	check_rd(char c)
 
 int	check_rd1(char c)
 {
+	if (!c)
+		return (0);
 	if (c == '>' || c == '<')
 		return (1);
 	return (0);
@@ -17,6 +21,8 @@ int	check_rd1(char c)
 
 int	check_sp(char c)
 {
+	if (!c)
+		return (0);
 	if (c == ' ' || c == '\t')
 		return (1);
 	return (0);
@@ -128,26 +134,32 @@ void	redirection_files(t_bash *bash, int i)
 
 	j = 0;
 	x = 0;
-	while (bash->s_cmd[i]->command[j])
-	{
-		if (check_rd1(bash->s_cmd[i]->command[j]))
-		{
-			if (check_rd1(bash->s_cmd[i]->command[j + 1]))
-				j += 2;
-			else
-				j++;
-			while (check_sp(bash->s_cmd[i]->command[j]))
-				j++;
-			start = j;
-			while (!check_rd(bash->s_cmd[i]->command[j]))
-				j++;
-			bash->s_cmd[i]->s_red[x]->file = ft_substr(bash->s_cmd[i]->command, start, j - start);
-			x++;
-		}
-		else
-			j++;
-	}
+ 	while (bash->s_cmd[i]->command[j] && bash->s_cmd[i]->s_red[x])
+    {
+        if (check_rd1(bash->s_cmd[i]->command[j]))
+        {
+            if (check_rd1(bash->s_cmd[i]->command[j + 1]))
+                j += 2;
+            else
+                j++;
+            while (check_sp(bash->s_cmd[i]->command[j]))
+                j++;
+            start = j;
+            while (bash->s_cmd[i]->command[j] && !check_rd(bash->s_cmd[i]->command[j]))
+                j++;
+            if (start < j) {
+                bash->s_cmd[i]->s_red[x]->file = ft_substr(bash->s_cmd[i]->command, start, j - start);
+                if (!bash->s_cmd[i]->s_red[x]->file) {
+                    return;
+                }
+            }
+            x++;
+        }
+        else
+            j++;
+    }
 }
+
 
 int	parse_redirection(t_bash *bash)
 {

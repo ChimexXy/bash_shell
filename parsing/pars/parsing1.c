@@ -1,21 +1,37 @@
 #include "../../inc/minishell.h"
 
-int	check_cmd(char *str)
+int	check_cmd(char *cmd)
+{
+	if (!check_cmd1(cmd))
+		return (0);
+	else if (!check_cmd2(cmd))
+		return (0);
+	else if (!check_cmd3(cmd))
+		return (0);
+	else if (!check_cmd4_1(cmd) || !check_cmd4_2(cmd))
+	{
+		printf("invalid token :( '>>>'\n");
+		return (0);
+	}
+	return (1);
+}
+
+int	check_cmd1(char *cmd)
 {
 	int	i;
 
 	i = 0;
-	if (str[i] == '|')
+	if (cmd[i] == '|')
 	{
-		if (str[i + 1] == '|')
+		if (cmd[i + 1] == '|')
 			printf("bash: syntax error near unexpected token `||'\n");
 		else
 			printf("bash: syntax error near unexpected token `|'\n");
 		return (0);
 	}
-	while (str[i])
+	while (cmd[i])
 	{
-		if (str[i] == '|' && str[i + 1] == '|')
+		if (cmd[i] == '|' && cmd[i + 1] == '|')
 		{
 			printf("invalid token :( \n");
 			return (0);
@@ -25,14 +41,14 @@ int	check_cmd(char *str)
 	return (1);
 }
 
-int	check_cmd1(char *str)
+int	check_cmd2(char *check_cmd1)
 {
 	int	i;
 
-	i = ft_strlen(str) - 1;
-	while (i >= 0 && str[i] == ' ')
+	i = ft_strlen(check_cmd1) - 1;
+	while (i >= 0 && check_cmd1[i] == ' ')
 		i--;
-	if (str[i] == '|')
+	if (check_cmd1[i] == '|')
 	{
 		printf("invalid command >\n");
 		return (0);
@@ -40,21 +56,21 @@ int	check_cmd1(char *str)
 	return (1);
 }
 
-int	check_cmd2(char *str)
+int	check_cmd3(char *cmd)
 {
 	int	i;
 
 	i = 0;
-	while (str[i])
+	while (cmd[i])
 	{
-		if (str[i] == '|')
+		if (cmd[i] == '|')
 		{
 			i++;
-			if (!str[i])
+			if (!cmd[i])
 				return (0);
-			while(str[i] == ' ')
+			while(cmd[i] == ' ')
 				i++;
-			if(str[i] == '|' || str[i] == '\0')
+			if(cmd[i] == '|' || cmd[i] == '\0')
 			{
 				printf("bash: syntax error near unexpected token `|'\n");
 				return (0);

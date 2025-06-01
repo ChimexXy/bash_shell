@@ -29,8 +29,7 @@ int	select_struct1(t_bash *bash)
 	char *cmd;
 
 	cmd = readline("minishell$ ");
-	if(!cmd || !check_cmd(cmd) || 
-		!check_cmd1(cmd) || !check_cmd2(cmd))
+	if(!cmd || !check_cmd(cmd))
 	{
 		// bash->num_cmd = 0;
 		free(cmd);
@@ -113,20 +112,20 @@ int	main()
 	while(1)
 	{
 		select_struct(bash);
-		int i = 0;
-		while(bash->s_cmd[i])
-		{
-			int j = 0;
-			if (bash->s_cmd[i]->s_red)
-			{
-				while(bash->s_cmd[i]->s_red[j])
-				{
-					printf("env num %d file: %s\n", j, bash->s_cmd[i]->s_red[j]->file);
-					printf("env num %d type: %u\n", j, bash->s_cmd[i]->s_red[j]->type);
-					j++;
-				}
-			}
-			i++;
-		}
+		// int i = 0;
+		// while(bash->s_cmd[i])
+		// {
+		// 	int j = 0;
+		// 	if (bash->s_cmd[i]->s_red)
+		// 	{
+		// 		while(bash->s_cmd[i]->s_red[j])
+		// 		{
+		// 			printf("env num %d file: %s\n", j, bash->s_cmd[i]->s_red[j]->file);
+		// 			printf("env num %d type: %u\n", j, bash->s_cmd[i]->s_red[j]->type);
+		// 			j++;
+		// 		}
+		// 	}
+		// 	i++;
+		// }
 	}
 }

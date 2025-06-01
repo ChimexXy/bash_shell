@@ -49,20 +49,54 @@ void check_red_env(t_bash *bash)
 	}
 }
 
-int	check_cmd3(char *str)
+int	check_cmd4_1(char *str)
 {
 	int	i;
+	int	x;
 
 	i = 0;
+	x = 0;
 	while(str[i])
 	{
-		if(str[i] == '>' || str[i] == '<')
+		x = 0;
+		if (str[i] == '>')
 		{
-			i++;
-			if((str[i] == '>' && str[i + 1] == '>')
-				|| (str[i] == '<' && str[i + 1] == '<'))
+			while(str[i] && str[i] == '>')
+			{
+				i++;
+				x++;
+			}
+			if (x > 2)
 				return (0);
-				
 		}
+		else
+			i++;
 	}
+	return (1);
+}
+
+int	check_cmd4_2(char *str)
+{
+	int	i;
+	int	x;
+
+	i = 0;
+	x = 0;
+	while(str[i])
+	{
+		x = 0;
+		if (str[i] == '<')
+		{
+			while (str[i] && str[i] == '<')
+			{
+				i++;
+				x++;
+			}
+			if (x > 2)
+				return (0);
+		}
+		else
+			i++;
+	}
+	return (1);
 }
