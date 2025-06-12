@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mozahnou <mozahnou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/12 08:28:24 by mozahnou          #+#    #+#             */
+/*   Updated: 2025/06/12 08:28:24 by mozahnou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../inc/minishell.h"
 
 void free_cmd_array(t_bash *bash)
@@ -104,11 +116,15 @@ void	select_struct(t_bash *bash)
 	parse_envirement(bash);
 }
 
-int	main()
+int	main(int ac, char **av, char **env)
 {
 	t_bash	*bash;
 
 	bash = malloc(sizeof(t_bash));
+	if (!bash)
+		return 0;
+	(void)ac;
+	(void)av;
 	while(1)
 	{
 		select_struct(bash);

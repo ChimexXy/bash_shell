@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mozahnou <mozahnou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/12 08:28:49 by mozahnou          #+#    #+#             */
-/*   Updated: 2025/06/12 08:28:49 by mozahnou         ###   ########.fr       */
+/*   Created: 2025/06/12 08:28:11 by mozahnou          #+#    #+#             */
+/*   Updated: 2025/06/12 08:29:48 by mozahnou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-int	ft_strlen(char *cmd)
+void	expand_func(t_bash *bash, char **env)
 {
-	int	i;
-
-	i = 0;
-	if (!cmd)
-		return (0);
-	while(cmd[i])
-		i++;
-	return (i);
+	
 }
