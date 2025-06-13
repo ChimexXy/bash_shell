@@ -6,7 +6,7 @@
 /*   By: mozahnou <mozahnou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 08:28:35 by mozahnou          #+#    #+#             */
-/*   Updated: 2025/06/12 08:28:35 by mozahnou         ###   ########.fr       */
+/*   Updated: 2025/06/13 13:30:04 by mozahnou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	redirection_types(t_bash *bash, int i)
 				bash->s_cmd[i]->s_red[x]->type = APPEND;
 				j += 2;
 			}
-			else
+			else if (bash->s_cmd[i]->command[j + 1] != '>')
 			{
 				bash->s_cmd[i]->s_red[x]->type = OUTPUT;
 				j++;
@@ -127,7 +127,7 @@ void	redirection_types1(t_bash *bash, int i)
 				bash->s_cmd[i]->s_red[x]->type = HERE_DOC;
 				j += 2;
 			}
-			else
+			else if (bash->s_cmd[i]->command[j + 1] != '>')
 			{
 				bash->s_cmd[i]->s_red[x]->type = INPUT;
 				j++;

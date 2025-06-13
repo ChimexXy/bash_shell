@@ -6,7 +6,7 @@
 /*   By: mozahnou <mozahnou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 08:28:32 by mozahnou          #+#    #+#             */
-/*   Updated: 2025/06/12 08:28:32 by mozahnou         ###   ########.fr       */
+/*   Updated: 2025/06/13 13:41:18 by mozahnou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	check_cmd4_1(char *str)
 				i++;
 				x++;
 			}
-			if (x > 2)
+			if (x > 2 || str[i] == '<')
 				return (0);
 		}
 		else
@@ -104,7 +104,7 @@ int	check_cmd4_2(char *str)
 				i++;
 				x++;
 			}
-			if (x > 2)
+			if (x > 2 || (x == 2 && str[i] == '>') )
 				return (0);
 		}
 		else
