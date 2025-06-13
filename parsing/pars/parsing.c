@@ -6,7 +6,7 @@
 /*   By: mozahnou <mozahnou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 08:28:24 by mozahnou          #+#    #+#             */
-/*   Updated: 2025/06/13 14:05:14 by mozahnou         ###   ########.fr       */
+/*   Updated: 2025/06/13 14:46:43 by mozahnou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	select_struct1(t_bash *bash)
 	add_history(cmd);
 	if(!cmd || !check_cmd(cmd))
 	{
-		free_bash(bash);
 		free(cmd);
 		return (0);
 	}
@@ -81,6 +80,10 @@ int	select_struct3(t_bash *bash)
 
 void	select_struct(t_bash *bash)
 {
+	bash->commands = NULL;
+	bash->args_pip = NULL;
+	bash->num_cmd = 0;
+	bash->s_cmd = NULL;
 	if (!select_struct1(bash))
 		return ;
 	if (!select_struct2(bash))
@@ -116,21 +119,21 @@ int	main(int ac, char **av, char **env)
 	{
 		// expand_func(bash, env);
 		select_struct(bash);
-
-		int i = 0;
-		while(bash->s_cmd[i])
-		{
-			int j = 0;
-			if (bash->s_cmd[i]->s_red)
-			{
-				while(bash->s_cmd[i]->s_red[j])
-				{
-					printf("env num %d file: %s\n", j, bash->s_cmd[i]->s_red[j]->file);
-					printf("env num %d type: %u\n", j, bash->s_cmd[i]->s_red[j]->type);
-					j++;
-				}
-			}
-			i++;
-		}
+		free_bash(bash);
 	}
 }
+		// int i = 0;
+		// while(bash->s_cmd[i])
+		// {
+		// 	int j = 0;
+		// 	if (bash->s_cmd[i]->s_red)
+		// 	{
+		// 		while(bash->s_cmd[i]->s_red[j])
+		// 		{
+		// 			printf("env num %d file: %s\n", j, bash->s_cmd[i]->s_red[j]->file);
+		// 			printf("env num %d type: %u\n", j, bash->s_cmd[i]->s_red[j]->type);
+		// 			j++;
+		// 		}
+		// 	}
+		// 	i++;
+		// }

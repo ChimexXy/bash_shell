@@ -6,7 +6,7 @@
 /*   By: mozahnou <mozahnou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 08:28:44 by mozahnou          #+#    #+#             */
-/*   Updated: 2025/06/12 08:28:44 by mozahnou         ###   ########.fr       */
+/*   Updated: 2025/06/13 14:50:57 by mozahnou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,8 @@ char **ft_split(char *cmd, char sep)
 
 	if(!cmd)
 		return (NULL);
-	word = ft_count_word(cmd, sep) + 1;
-	ret = malloc(sizeof(char *) * word);
+	word = ft_count_word(cmd, sep);
+	ret = malloc(sizeof(char *) * word + 1);
 	if (!ret)
 		return (NULL);
 	ret = alloc_words(ret, cmd, sep, word);

@@ -6,7 +6,7 @@
 /*   By: mozahnou <mozahnou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 08:28:41 by mozahnou          #+#    #+#             */
-/*   Updated: 2025/06/13 14:07:21 by mozahnou         ###   ########.fr       */
+/*   Updated: 2025/06/13 14:51:37 by mozahnou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,11 @@ void	free_bash(t_bash *bash)
 {
 	if (!bash)
 		return ;
-	// free(bash->commands);
+	if (bash->commands)
+		free(bash->commands);
 	if (bash->args_pip)
 	{
+		// pause();
 		int i = 0;
 		while (bash->args_pip[i])
 		{
@@ -89,6 +91,6 @@ void	free_bash(t_bash *bash)
 		free(bash->args_pip);
 	}
 	free_cmds(bash);
-	free(bash);
 }
+
 
