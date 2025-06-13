@@ -6,7 +6,7 @@
 /*   By: mozahnou <mozahnou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 08:28:29 by mozahnou          #+#    #+#             */
-/*   Updated: 2025/06/12 08:28:29 by mozahnou         ###   ########.fr       */
+/*   Updated: 2025/06/13 12:06:00 by mozahnou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,12 @@ int	check_cmd(char *cmd)
 		return (0);
 	else if (!check_cmd4_1(cmd) || !check_cmd4_2(cmd))
 	{
-		printf("invalid token :( '>>>'\n");
+		printf("invalid token :(\n");
+		return (0);
+	}
+	else if(!check_sin_dou(cmd))
+	{
+		printf("double or single qoutes no matched :( \n");
 		return (0);
 	}
 	return (1);
@@ -112,22 +117,4 @@ int	count_pipes(char *cmd)
 	return (pipes);
 }
 
-int	red_parse(t_bash *bash)
-{
-	int	i;
-	int	j;
 
-	i = 0;
-	while (i < bash->num_cmd)
-	{
-		j = ft_strlen(bash->s_cmd[i]->command) - 1;
-		while (j >= 0 && (bash->s_cmd[i]->command[j] == ' '
-				|| bash->s_cmd[i]->command[j] == '\t'))
-			j--;
-		if (j >= 0 && (bash->s_cmd[i]->command[j] == '>'
-				|| bash->s_cmd[i]->command[j] == '<'))
-			return (0);
-		i++;
-	}
-	return (1);
-}

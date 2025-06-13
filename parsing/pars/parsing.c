@@ -6,7 +6,7 @@
 /*   By: mozahnou <mozahnou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 08:28:24 by mozahnou          #+#    #+#             */
-/*   Updated: 2025/06/12 08:28:24 by mozahnou         ###   ########.fr       */
+/*   Updated: 2025/06/13 12:09:58 by mozahnou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ int	select_struct1(t_bash *bash)
 	cmd = readline("minishell$ ");
 	if(!cmd || !check_cmd(cmd))
 	{
-		// bash->num_cmd = 0;
 		free(cmd);
 		return (0);
 	}
+	add_history(cmd);
 	bash->num_cmd = count_pipes(cmd);
 	bash->s_cmd = malloc(sizeof(t_cmd *) * (bash->num_cmd + 1));
 	if (!bash->s_cmd)
@@ -81,7 +81,6 @@ int	select_struct2(t_bash *bash)
 	if (!red_parse(bash))
 	{
         printf("minishell: syntax error near unexpected token `newline'\n");
-        // free_cmd_array(bash);
 		return (0);
 	}
 	return (1);
@@ -116,6 +115,17 @@ void	select_struct(t_bash *bash)
 	parse_envirement(bash);
 }
 
+void print_dou(char **env)
+{
+	int j = 0;
+	while(env[j])
+	{
+		printf("%s\n", env[j]);
+		j++;
+	}
+
+}
+
 int	main(int ac, char **av, char **env)
 {
 	t_bash	*bash;
@@ -127,6 +137,7 @@ int	main(int ac, char **av, char **env)
 	(void)av;
 	while(1)
 	{
+		// expand_func(bash, env);
 		select_struct(bash);
 		// int i = 0;
 		// while(bash->s_cmd[i])

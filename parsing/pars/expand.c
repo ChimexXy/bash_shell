@@ -6,7 +6,7 @@
 /*   By: mozahnou <mozahnou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 08:28:11 by mozahnou          #+#    #+#             */
-/*   Updated: 2025/06/12 08:29:48 by mozahnou         ###   ########.fr       */
+/*   Updated: 2025/06/12 15:48:50 by mozahnou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 void	expand_func(t_bash *bash, char **env)
 {
-	
+	print_dou(env);
 }
