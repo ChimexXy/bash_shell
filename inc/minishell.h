@@ -8,10 +8,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define MAX_PATH_LEN 4096
-# define SUCCESS 0
-# define ERROR 1
-
 typedef enum x_type
 {
 	// REDIRECTION,
@@ -44,6 +40,7 @@ typedef struct x_cmd
 {
 	char	*command;
 	char	**arguments;
+	// char	**env;
 	int		check_red;
 	int		check_env;
 
@@ -58,6 +55,7 @@ typedef struct x_bash
 	char	**args_pip;
 	int		num_cmd;
 
+	t_env	**path_env;
 	t_cmd	**s_cmd;
 
 }			t_bash;
@@ -85,7 +83,6 @@ int		check_cmd1(char *str);
 int		check_cmd2(char *str);
 int		check_cmd3(char *str);
 int		count_pipes(char *cmd);
-int		red_parse(t_bash *bash);
 
 
 //->parsing2:
@@ -95,6 +92,11 @@ int		check_redirection(char *str);
 void	check_red_env(t_bash *bash);
 int		check_cmd4_1(char *str);
 int		check_cmd4_2(char *str);
+
+//->parsing3:
+
+int	red_parse(t_bash *bash);
+int	check_sin_dou(char *line);
 
 //->tokrnizer
 
@@ -123,12 +125,25 @@ int 	alloc_env(t_bash *bash, int num_env, int ind);
 void	parse_env_file_key(t_bash *bash, int i);
 int 	parse_envirement(t_bash *bash);
 
+//->expand
+
+void	expand_func(t_bash *bash, char **env);
+void 	print_dou(char **env);
+int		check_sin_dou(char *line);
+
 //->utils(libft)
 
 char	**ft_split(char *cmd, char sep);
 char	*ft_strdup(char *cmd);
 int		ft_strlen(char *cmd);
 char	*ft_substr(char *str, int start, int len);
+
+//->free
+
+void	free_redirections(t_bash *bash, int ind);
+void	free_envs(t_bash *bash, int ind);
+void	free_cmds(t_bash *bash);
+void	free_bash(t_bash *bash);
 
 // parsing function
 
