@@ -6,26 +6,17 @@
 /*   By: mozahnou <mozahnou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 08:28:24 by mozahnou          #+#    #+#             */
-/*   Updated: 2025/06/13 15:30:04 by mozahnou         ###   ########.fr       */
+/*   Updated: 2025/06/18 11:15:39 by mozahnou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-int	select_struct1(t_bash *bash)
+int	select_struct1(t_bash *bash, char *cmd)
 {
-	char *cmd;
-
-	cmd = readline("minishell$ ");
-	add_history(cmd);
-	if(!cmd || !check_cmd(cmd))
-	{
-		free(cmd);
-		return (0);
-	}
 	bash->num_cmd = count_pipes(cmd);
 	bash->s_cmd = malloc(sizeof(t_cmd *) * (bash->num_cmd + 1));
-	if (!bash->s_cmd)
+	if (!bash->s_cmd || !check_cmd(cmd))
 	{
 		free(cmd);
 		return (0);
@@ -78,13 +69,13 @@ int	select_struct3(t_bash *bash)
 	return (1);
 }
 
-void	select_struct(t_bash *bash)
+void	select_struct(t_bash *bash, char *cmd)
 {
 	bash->commands = NULL;
 	bash->args_pip = NULL;
 	bash->num_cmd = 0;
 	bash->s_cmd = NULL;
-	if (!select_struct1(bash))
+	if (!select_struct1(bash, cmd))
 		return ;
 	if (!select_struct2(bash))
 		return ;
@@ -109,6 +100,7 @@ void print_dou(char **env)
 int	main(int ac, char **av, char **env)
 {
 	t_bash	*bash;
+	char	*cmd;
 
 	bash = malloc(sizeof(t_bash));
 	if (!bash)
@@ -117,20 +109,27 @@ int	main(int ac, char **av, char **env)
 	(void)av;
 	while(1)
 	{
-		// expand_func(bash, env);
-		select_struct(bash);
+		cmd = readline("minishell$ ");
+		add_history(cmd);
+		if(!cmd)
+		{
+			printf("exit\n");
+			free(cmd);
+			break;
+		}
+		select_struct(bash, cmd);
 		if(bash->s_cmd)
 		{
 			int i = 0;
 			while(bash->s_cmd[i])
 			{
 				int j = 0;
-				if (bash->s_cmd[i]->s_red)
+				if (bash->s_cmd[i]->s_env)
 				{
-					while(bash->s_cmd[i]->s_red[j])
+					while(bash->s_cmd[i]->s_env[j])
 					{
-						printf("env num %d file: %s\n", j, bash->s_cmd[i]->s_red[j]->file);
-						printf("env num %d type: %u\n", j, bash->s_cmd[i]->s_red[j]->type);
+						printf("env num %d file: %s\n", j, bash->s_cmd[i]->s_env[j]->key);
+						printf("env num %d type: %s\n", j, bash->s_cmd[i]->s_env[j]->value);
 						j++;
 					}
 				}

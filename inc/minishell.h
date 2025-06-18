@@ -71,10 +71,10 @@ typedef struct x_bash
 
 //->parsing:
 
-int		select_struct1(t_bash *bash);
+int		select_struct1(t_bash *bash, char *cmd);
 int		select_struct2(t_bash *bash);
 int		select_struct3(t_bash *bash);
-void	select_struct(t_bash *bash);
+void	select_struct(t_bash *bash, char *cmd);
 
 //->parsing1:
 
