@@ -6,7 +6,7 @@
 /*   By: mozahnou <mozahnou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 08:28:24 by mozahnou          #+#    #+#             */
-/*   Updated: 2025/06/19 15:40:38 by mozahnou         ###   ########.fr       */
+/*   Updated: 2025/06/19 15:51:02 by mozahnou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,13 @@
 int	select_struct1(t_bash *bash, char *cmd)
 {
 	bash->num_cmd = count_pipes(cmd);
+	if (!check_cmd(cmd))
+	{
+		free(cmd);
+		return (0);
+	}
 	bash->s_cmd = malloc(sizeof(t_cmd *) * (bash->num_cmd + 1));
-	if (!bash->s_cmd || !check_cmd(cmd))
+	if (!bash->s_cmd)
 	{
 		free(cmd);
 		return (0);
@@ -73,8 +78,8 @@ void	select_struct(t_bash *bash, char *cmd, char **env)
 {
 	bash->commands = NULL;
 	bash->args_pip = NULL;
-	bash->num_cmd = 0;
 	bash->s_cmd = NULL;
+	bash->num_cmd = 0;
 	if (!select_struct1(bash, cmd))
 		return ;
 	if (!select_struct2(bash))
@@ -110,6 +115,7 @@ int	main(int ac, char **av, char **env)
 			break;
 		}
 		select_struct(bash, cmd, env);
+		// pause();
 		if(bash->s_cmd)
 		{
 			int i = 0;

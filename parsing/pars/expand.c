@@ -6,11 +6,21 @@
 /*   By: mozahnou <mozahnou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 08:28:11 by mozahnou          #+#    #+#             */
-/*   Updated: 2025/06/19 12:45:54 by mozahnou         ###   ########.fr       */
+/*   Updated: 2025/06/19 15:53:04 by mozahnou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
+int count_ex(char **env)
+{
+	int i;
+
+	i = 0;
+	while(env[i])
+		i++;
+	return (i);
+}
 
 void	free_double_pointer_ex(char **arr)
 {
@@ -42,7 +52,7 @@ void	expand_func(t_bash *bash, char **env)
 	char	**splited;
 
 	i = 0;
-	bash->path_env = malloc(sizeof(t_env *));
+	bash->path_env = malloc(sizeof(t_env *) * (count_ex(env) + 1));
 	while(env[i])
 	{
 		bash->path_env[i] = malloc(sizeof(t_env));
