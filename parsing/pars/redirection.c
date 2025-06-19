@@ -6,7 +6,7 @@
 /*   By: mozahnou <mozahnou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 08:28:35 by mozahnou          #+#    #+#             */
-/*   Updated: 2025/06/13 13:30:04 by mozahnou         ###   ########.fr       */
+/*   Updated: 2025/06/19 10:29:45 by mozahnou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,29 +147,24 @@ void	redirection_files(t_bash *bash, int i)
 	j = 0;
 	x = 0;
  	while (bash->s_cmd[i]->command[j] && bash->s_cmd[i]->s_red[x])
-    {
-        if (check_rd1(bash->s_cmd[i]->command[j]))
-        {
-            if (check_rd1(bash->s_cmd[i]->command[j + 1]))
-                j += 2;
-            else
-                j++;
-            while (check_sp(bash->s_cmd[i]->command[j]))
-                j++;
-            start = j;
-            while (bash->s_cmd[i]->command[j] && !check_rd(bash->s_cmd[i]->command[j]))
-                j++;
-            if (start < j) {
-                bash->s_cmd[i]->s_red[x]->file = ft_substr(bash->s_cmd[i]->command, start, j - start);
-                if (!bash->s_cmd[i]->s_red[x]->file) {
-                    return;
-                }
-            }
-            x++;
-        }
-        else
-            j++;
-    }
+	{
+		if (check_rd1(bash->s_cmd[i]->command[j]))
+		{
+			if (check_rd1(bash->s_cmd[i]->command[j + 1]))
+				j += 2;
+			else
+				j++;
+			while (check_sp(bash->s_cmd[i]->command[j]))
+				j++;
+			start = j;
+			while (bash->s_cmd[i]->command[j] && !check_rd(bash->s_cmd[i]->command[j]))
+				j++;
+			bash->s_cmd[i]->s_red[x]->file = ft_substr(bash->s_cmd[i]->command, start, j - start);
+			x++;
+		}
+		else
+			j++;
+	}
 }
 
 
