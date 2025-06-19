@@ -6,7 +6,7 @@
 /*   By: mozahnou <mozahnou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 08:28:24 by mozahnou          #+#    #+#             */
-/*   Updated: 2025/06/18 11:15:39 by mozahnou         ###   ########.fr       */
+/*   Updated: 2025/06/19 12:46:18 by mozahnou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	select_struct3(t_bash *bash)
 	return (1);
 }
 
-void	select_struct(t_bash *bash, char *cmd)
+void	select_struct(t_bash *bash, char *cmd, char **env)
 {
 	bash->commands = NULL;
 	bash->args_pip = NULL;
@@ -84,18 +84,10 @@ void	select_struct(t_bash *bash, char *cmd)
 	check_red_env(bash);
 	parse_redirection(bash);
 	parse_envirement(bash);
+	expand_func(bash, env);
 }
 
-void print_dou(char **env)
-{
-	int j = 0;
-	while(env[j])
-	{
-		printf("%s\n", env[j]);
-		j++;
-	}
 
-}
 
 int	main(int ac, char **av, char **env)
 {
@@ -117,7 +109,7 @@ int	main(int ac, char **av, char **env)
 			free(cmd);
 			break;
 		}
-		select_struct(bash, cmd);
+		select_struct(bash, cmd, env);
 		if(bash->s_cmd)
 		{
 			int i = 0;

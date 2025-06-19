@@ -6,69 +6,18 @@
 /*   By: mozahnou <mozahnou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 08:28:35 by mozahnou          #+#    #+#             */
-/*   Updated: 2025/06/19 10:29:45 by mozahnou         ###   ########.fr       */
+/*   Updated: 2025/06/19 12:46:39 by mozahnou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
-
-int	check_rd(char c)
-{
-	if (!c)
-		return (0);
-	if (c == '>' || c == '<' 
-		|| c == ' ' || c == '\t')
-		return (1);
-	return (0);
-}
-
-int	check_rd1(char c)
-{
-	if (!c)
-		return (0);
-	if (c == '>' || c == '<')
-		return (1);
-	return (0);
-}
-
-int	check_sp(char c)
-{
-	if (!c)
-		return (0);
-	if (c == ' ' || c == '\t')
-		return (1);
-	return (0);
-}
-
-int	count_redirection(char *cmd)
-{
-	int	i;
-	int	red;
-
-	i = 0;
-	red = 0;
-	while (cmd[i])
-	{
-		if (cmd[i] == '>' || cmd[i] == '<')
-		{
-			if (cmd[i + 1] == '>' || cmd[i + 1] == '<')
-				i += 2;
-			else
-				i++;
-			red++;
-		}
-		else
-			i++;
-	}
-	return (red);
-}
 
 int	alloc_s_red(t_bash *bash, int n_red, int i)
 {
 	int	x;
 
 	x = 0;
-	bash->s_cmd[i]->s_red = malloc(sizeof(t_red) * (n_red + 1));
+	bash->s_cmd[i]->s_red = malloc(sizeof(t_red *) * (n_red + 1));
 	if (!bash->s_cmd[i]->s_red)
 		return (0);
 	while(x < n_red)

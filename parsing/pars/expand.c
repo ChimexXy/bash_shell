@@ -6,7 +6,7 @@
 /*   By: mozahnou <mozahnou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 08:28:11 by mozahnou          #+#    #+#             */
-/*   Updated: 2025/06/13 20:39:44 by mozahnou         ###   ########.fr       */
+/*   Updated: 2025/06/19 12:45:54 by mozahnou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,29 @@ void	free_double_pointer_ex(char **arr)
 	free(arr);
 }
 
+void print_dou(char **env)
+{
+	int j = 0;
+	while(env[j])
+	{
+		printf("%s\n", env[j]);
+		j++;
+	}
+
+}
+
 void	expand_func(t_bash *bash, char **env)
 {
 	int		i;
 	char	**splited;
 
 	i = 0;
+	bash->path_env = malloc(sizeof(t_env *));
 	while(env[i])
 	{
+		bash->path_env[i] = malloc(sizeof(t_env));
+    	if (!bash->path_env[i])
+        	return ;
 		splited = ft_split(env[i], '=');
 		if (!splited)
 		{
@@ -40,9 +55,12 @@ void	expand_func(t_bash *bash, char **env)
 			return ;
 		}
 		bash->path_env[i]->key = ft_strdup(splited[0]); 
-		bash->path_env[i]->value = ft_strdup(splited[1]);
+		if(!splited[1])
+			bash->path_env[i]->value = ft_strdup("");
+		else
+			bash->path_env[i]->value = ft_strdup(splited[1]);
 		free_double_pointer_ex(splited);
 		i++;
 	}
-
 }
+

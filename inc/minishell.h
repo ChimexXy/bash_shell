@@ -40,7 +40,6 @@ typedef struct x_cmd
 {
 	char	*command;
 	char	**arguments;
-	// char	**env;
 	int		check_red;
 	int		check_env;
 
@@ -74,7 +73,7 @@ typedef struct x_bash
 int		select_struct1(t_bash *bash, char *cmd);
 int		select_struct2(t_bash *bash);
 int		select_struct3(t_bash *bash);
-void	select_struct(t_bash *bash, char *cmd);
+void	select_struct(t_bash *bash, char *cmd, char **env);
 
 //->parsing1:
 
@@ -106,12 +105,15 @@ int		check_tokinzer(char c);
 void	free_double_pointer_tk(char **arr, int p);
 char	**tokenizer(char *cmd);
 
-//->redirection:
+//->check_redirecton
 
 int		check_rd(char c);
 int		check_rd1(char c);
 int		check_sp(char c);
 int		count_redirection(char *cmd);
+
+//->redirection:
+
 int		alloc_s_red(t_bash *bash, int n_red, int i);
 void	redirection_types(t_bash *bash, int i);
 void	redirection_types1(t_bash *bash, int i);
@@ -128,7 +130,7 @@ int 	parse_envirement(t_bash *bash);
 //->expand
 
 void	expand_func(t_bash *bash, char **env);
-void 	print_dou(char **env);
+void	free_double_pointer_ex(char **arr);
 int		check_sin_dou(char *line);
 
 //->utils(libft)
