@@ -6,7 +6,7 @@
 /*   By: mozahnou <mozahnou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 08:28:41 by mozahnou          #+#    #+#             */
-/*   Updated: 2025/06/13 15:51:48 by mozahnou         ###   ########.fr       */
+/*   Updated: 2025/06/19 15:39:59 by mozahnou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,16 @@ void	free_envs(t_bash *bash, int ind)
 void	free_cmds(t_bash *bash)
 {
 	int i;
+	int j;
 
 	i = 0;
 	if (!bash->s_cmd)
 		return ;
 	while (bash->s_cmd[i])
 	{
-		free(bash->s_cmd[i]->command);
 		if (bash->s_cmd[i]->arguments)
 		{
-			int j = 0;
+			j = 0;
 			while (bash->s_cmd[i]->arguments[j])
 			{
 				free(bash->s_cmd[i]->arguments[j]);
@@ -65,9 +65,14 @@ void	free_cmds(t_bash *bash)
 			}
 			free(bash->s_cmd[i]->arguments);
 		}
-		free_redirections(bash, i);
-		free_envs(bash, i);
-		free(bash->s_cmd[i]);
+		if (bash->s_cmd[i]->command)
+			free(bash->s_cmd[i]->command);
+		// if (bash->s_cmd[i])
+		// {
+		//     free_redirections(bash, i);
+		//     free_envs(bash, i);
+		//     free(bash->s_cmd[i]);
+		// }
 		i++;
 	}
 	free(bash->s_cmd);
@@ -90,6 +95,7 @@ void	free_bash(t_bash *bash)
 		free(bash->args_pip);
 	}
 	free_cmds(bash);
+	
 }
 
 
