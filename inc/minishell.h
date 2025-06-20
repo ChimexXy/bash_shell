@@ -94,8 +94,8 @@ int		check_cmd4_2(char *str);
 
 //->parsing3:
 
-int	red_parse(t_bash *bash);
-int	check_sin_dou(char *line);
+int		red_parse(t_bash *bash);
+int		check_sin_dou(char *line);
 
 //->tokrnizer
 
@@ -127,17 +127,22 @@ int 	alloc_env(t_bash *bash, int num_env, int ind);
 void	parse_env_file_key(t_bash *bash, int i);
 int 	parse_envirement(t_bash *bash);
 
+//->path
+
+void	select_path(t_bash *bash, char **env);
+void	free_double_pointer_path(char **arr);
+int 	count_path(char **env);
+
 //->expand
 
-void	expand_func(t_bash *bash, char **env);
-void	free_double_pointer_ex(char **arr);
-int		check_sin_dou(char *line);
+
 
 //->utils(libft)
 
 char	**ft_split(char *cmd, char sep);
 char	*ft_strdup(char *cmd);
 int		ft_strlen(char *cmd);
+int		ft_strcmp(char *s1, char *s2);
 char	*ft_substr(char *str, int start, int len);
 
 //->free

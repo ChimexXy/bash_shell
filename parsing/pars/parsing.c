@@ -6,7 +6,7 @@
 /*   By: mozahnou <mozahnou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 08:28:24 by mozahnou          #+#    #+#             */
-/*   Updated: 2025/06/20 10:47:49 by mozahnou         ###   ########.fr       */
+/*   Updated: 2025/06/20 11:42:59 by mozahnou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	select_struct(t_bash *bash, char *cmd, char **env)
 	check_red_env(bash);
 	parse_redirection(bash);
 	parse_envirement(bash);
-	expand_func(bash, env);
+	select_path(bash, env);
 }
 
 

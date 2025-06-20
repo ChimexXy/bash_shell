@@ -6,7 +6,7 @@
 /*   By: mozahnou <mozahnou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 08:28:19 by mozahnou          #+#    #+#             */
-/*   Updated: 2025/06/19 15:48:38 by mozahnou         ###   ########.fr       */
+/*   Updated: 2025/06/20 11:47:28 by mozahnou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int alloc_env(t_bash *bash, int num_env, int ind)
 		bash->s_cmd[ind]->s_env[i]->value = NULL;
 		i++;
 	}
-	bash->s_cmd[ind]->s_env[num_env] = NULL;
+	bash->s_cmd[ind]->s_env[i] = NULL;
 	return (1);
 }
 
