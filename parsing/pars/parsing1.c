@@ -6,7 +6,7 @@
 /*   By: mozahnou <mozahnou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 08:28:29 by mozahnou          #+#    #+#             */
-/*   Updated: 2025/06/13 12:06:00 by mozahnou         ###   ########.fr       */
+/*   Updated: 2025/06/20 10:51:46 by mozahnou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	check_cmd2(char *check_cmd1)
 		i--;
 	if (check_cmd1[i] == '|')
 	{
-		printf("invalid command >\n");
+		printf("Time out command :(\n");
 		return (0);
 	}
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: mozahnou <mozahnou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 08:28:24 by mozahnou          #+#    #+#             */
-/*   Updated: 2025/06/19 15:51:02 by mozahnou         ###   ########.fr       */
+/*   Updated: 2025/06/20 10:47:49 by mozahnou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ int	main(int ac, char **av, char **env)
 			break;
 		}
 		select_struct(bash, cmd, env);
-		// pause();
+
 		if(bash->s_cmd)
 		{
 			int i = 0;
