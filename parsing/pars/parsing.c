@@ -6,7 +6,7 @@
 /*   By: mozahnou <mozahnou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 08:28:24 by mozahnou          #+#    #+#             */
-/*   Updated: 2025/06/20 11:42:59 by mozahnou         ###   ########.fr       */
+/*   Updated: 2025/06/20 12:52:50 by mozahnou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ void	select_struct(t_bash *bash, char *cmd, char **env)
 	parse_redirection(bash);
 	parse_envirement(bash);
 	select_path(bash, env);
+	expand_func(bash);
 }
 
 
@@ -122,12 +123,12 @@ int	main(int ac, char **av, char **env)
 			while(bash->s_cmd[i])
 			{
 				int j = 0;
-				if (bash->s_cmd[i]->s_env)
+				if (bash->s_cmd[i]->arguments)
 				{
-					while(bash->s_cmd[i]->s_env[j])
+					while(bash->s_cmd[i]->arguments[j])
 					{
-						printf("env num %d file: %s\n", j, bash->s_cmd[i]->s_env[j]->key);
-						printf("env num %d type: %s\n", j, bash->s_cmd[i]->s_env[j]->value);
+						printf("env num %d file: %s\n", j, bash->s_cmd[i]->arguments[j]);
+						// printf("env num %d type: %s\n", j, bash->s_cmd[i]->s_env[j]->value);
 						j++;
 					}
 				}

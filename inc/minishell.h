@@ -94,6 +94,7 @@ int		check_redirection(char *str);
 
 //->parsing3:
 
+int		check_dollar(char *cmd);
 int		red_parse(t_bash *bash);
 int		check_sin_dou(char *line);
 
