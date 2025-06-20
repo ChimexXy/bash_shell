@@ -70,9 +70,9 @@ typedef struct x_bash
 
 //->parsing:
 
-int		select_struct1(t_bash *bash, char *cmd);
 int		select_struct2(t_bash *bash);
 int		select_struct3(t_bash *bash);
+int		select_struct1(t_bash *bash, char *cmd);
 void	select_struct(t_bash *bash, char *cmd, char **env);
 
 //->parsing1:
@@ -86,11 +86,11 @@ int		count_pipes(char *cmd);
 
 //->parsing2:
 
-int		check_envirment(char *str);
-int		check_redirection(char *str);
-void	check_red_env(t_bash *bash);
 int		check_cmd4_1(char *str);
 int		check_cmd4_2(char *str);
+int		check_envirment(char *str);
+void	check_red_env(t_bash *bash);
+int		check_redirection(char *str);
 
 //->parsing3:
 
@@ -99,58 +99,61 @@ int		check_sin_dou(char *line);
 
 //->tokrnizer
 
-char	**alloc_words_tk(char **ret, char *cmd, int word);
-int		count_word_tk(char *cmd);
 int		check_tokinzer(char c);
-void	free_double_pointer_tk(char **arr, int p);
 char	**tokenizer(char *cmd);
+int		count_word_tk(char *cmd);
+void	free_double_pointer_tk(char **arr, int p);
+char	**alloc_words_tk(char **ret, char *cmd, int word);
 
 //->check_redirecton
 
 int		check_rd(char c);
-int		check_rd1(char c);
 int		check_sp(char c);
+int		check_rd1(char c);
 int		count_redirection(char *cmd);
 
 //->redirection:
 
-int		alloc_s_red(t_bash *bash, int n_red, int i);
-void	redirection_types(t_bash *bash, int i);
-void	redirection_types1(t_bash *bash, int i);
-void	redirection_files(t_bash *bash, int i);
 int		parse_redirection(t_bash *bash);
+void	redirection_types(t_bash *bash, int i);
+void	redirection_files(t_bash *bash, int i);
+void	redirection_types1(t_bash *bash, int i);
+int		alloc_s_red(t_bash *bash, int n_red, int i);
 
 //->envirement:
 
 int 	count_env(char *str);
-int 	alloc_env(t_bash *bash, int num_env, int ind);
-void	parse_env_file_key(t_bash *bash, int i);
 int 	parse_envirement(t_bash *bash);
+void	parse_env_file_key(t_bash *bash, int i);
+int 	alloc_env(t_bash *bash, int num_env, int ind);
 
 //->path
 
-void	select_path(t_bash *bash, char **env);
-void	free_double_pointer_path(char **arr);
 int 	count_path(char **env);
+void	free_double_pointer_path(char **arr);
+void	select_path(t_bash *bash, char **env);
 
 //->expand
 
-
+int		check_quotes(char *cmd);
+void	expand_func(t_bash *bash);
+int		check_expand(t_bash *bash, char *cmd);
+void	select_new(t_bash *bash, int i, int j);
 
 //->utils(libft)
 
-char	**ft_split(char *cmd, char sep);
 char	*ft_strdup(char *cmd);
 int		ft_strlen(char *cmd);
 int		ft_strcmp(char *s1, char *s2);
+char	**ft_split(char *cmd, char sep);
 char	*ft_substr(char *str, int start, int len);
 
 //->free
 
-void	free_redirections(t_bash *bash, int ind);
-void	free_envs(t_bash *bash, int ind);
-void	free_cmds(t_bash *bash);
 void	free_bash(t_bash *bash);
+void	free_cmds(t_bash *bash);
+void	free_envs(t_bash *bash, int ind);
+void	free_redirections(t_bash *bash, int ind);
 
 // parsing function
 

@@ -6,11 +6,21 @@
 /*   By: mozahnou <mozahnou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 11:44:35 by mozahnou          #+#    #+#             */
-/*   Updated: 2025/06/20 12:13:23 by mozahnou         ###   ########.fr       */
+/*   Updated: 2025/06/20 12:48:07 by mozahnou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
+int	check_quotes(char *cmd)
+{
+	int	e;
+
+	e = ft_strlen(cmd);
+	if (cmd[0] == 39  && cmd[e] == 39)
+		return (0);
+	return (1);
+}
 
 int	check_expand(t_bash *bash, char *cmd)
 {
@@ -53,7 +63,8 @@ void	expand_func(t_bash *bash)
 		j = 0;
 		while (bash->s_cmd[i]->arguments[j])
 		{
-			if (check_dollar(bash->s_cmd[i]->arguments[j]))
+			if (check_dollar(bash->s_cmd[i]->arguments[j])
+				&& check_quotes(bash->s_cmd[i]->arguments[j]))
 				select_new(bash, i, j);
 			j++;
 		}
