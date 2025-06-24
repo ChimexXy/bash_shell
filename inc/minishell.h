@@ -147,6 +147,7 @@ char	*ft_strdup(char *cmd);
 int		ft_strlen(char *cmd);
 int		ft_strcmp(char *s1, char *s2);
 char	**ft_split(char *cmd, char sep);
+char	*ft_strjoin(char *s1, char *s2);
 char	*ft_substr(char *str, int start, int len);
 
 //->free

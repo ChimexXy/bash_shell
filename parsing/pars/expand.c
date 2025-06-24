@@ -6,7 +6,7 @@
 /*   By: mozahnou <mozahnou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 11:44:35 by mozahnou          #+#    #+#             */
-/*   Updated: 2025/06/20 12:56:35 by mozahnou         ###   ########.fr       */
+/*   Updated: 2025/06/24 22:39:08 by mozahnou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,12 @@ int	check_expand(t_bash *bash, char *cmd)
 
 	i = 0;
 	j = 0;
-	if (cmd[i] == '$')
+	while (cmd[j] != '$' && cmd[j])
 		j++;
+	if (cmd[j] == '$')
+		j++;
+	// j == ?
+		// return exit_status
 	while (bash->path_env[i])
 	{
 		if (ft_strcmp(bash->path_env[i]->key, cmd + j) == 1)
@@ -43,13 +47,26 @@ int	check_expand(t_bash *bash, char *cmd)
 void	select_new(t_bash *bash, int i, int j)
 {
 	int	c;
+	char **sp;
 
 	c = check_expand(bash, bash->s_cmd[i]->arguments[j]);
+	sp = NULL;
+	if(bash->s_cmd[i]->arguments[j][0] != '$')
+		sp = ft_split(bash->s_cmd[i]->arguments[j], '$');
 	if (c != -1)
 	{
 		free(bash->s_cmd[i]->arguments[j]);
-		bash->s_cmd[i]->arguments[j] = ft_strdup(bash->path_env[c]->value);
+		if(!sp[0])
+			bash->s_cmd[i]->arguments[j] = ft_strjoin(sp[0], bash->path_env[c]->value);
+		// pause();
+		else
+			bash->s_cmd[i]->arguments[j] = ft_strdup(bash->path_env[c]->value);
 	}
+	else
+	{
+		free(bash->s_cmd[i]->arguments[j]);
+		bash->s_cmd[i]->arguments[j] = ft_strdup("");
+	}	
 }
 
 void	expand_func(t_bash *bash)
