@@ -6,7 +6,7 @@
 /*   By: mozahnou <mozahnou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 08:28:11 by mozahnou          #+#    #+#             */
-/*   Updated: 2025/06/20 11:46:41 by mozahnou         ###   ########.fr       */
+/*   Updated: 2025/06/25 13:22:53 by mozahnou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int count_path(char **env)
 	int i;
 
 	i = 0;
+
 	while(env[i])
 		i++;
 	return (i);
@@ -27,6 +28,8 @@ void	free_double_pointer_path(char **arr)
 	int	p;
 
 	p = 0;
+	if(!arr)
+		return ;
 	while (arr[p])
 	{
 		free(arr[p]);

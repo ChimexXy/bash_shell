@@ -6,11 +6,33 @@
 /*   By: mozahnou <mozahnou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 11:44:35 by mozahnou          #+#    #+#             */
-/*   Updated: 2025/06/24 23:28:37 by mozahnou         ###   ########.fr       */
+/*   Updated: 2025/06/25 13:42:50 by mozahnou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
+char	*after_dollar(char *cmd)
+{
+	int		i;
+	int		j;
+	char	*ret;
+
+	i = 0;
+	j = 0;
+	if (cmd[j] == '$')
+		return (NULL);
+	while(cmd[j] && cmd[j] != '$')
+		j++;
+	ret = malloc((sizeof(char) * j) + 1);
+	while (i < j)
+	{
+		ret[i] = cmd[i];
+		i++; 
+	}
+	ret[i] = '\0';
+	return (ret);
+}
 
 int	check_quotes(char *cmd)
 {
@@ -33,8 +55,6 @@ int	check_expand(t_bash *bash, char *cmd)
 		j++;
 	if (cmd[j] == '$')
 		j++;
-	// j == ?
-		// return exit_status
 	while (bash->path_env[i])
 	{
 		if (ft_strcmp(bash->path_env[i]->key, cmd + j) == 1)
@@ -47,17 +67,15 @@ int	check_expand(t_bash *bash, char *cmd)
 void	select_new(t_bash *bash, int i, int j)
 {
 	int		c;
-	char	**sp;
+	char	*af;
 
 	c = check_expand(bash, bash->s_cmd[i]->arguments[j]);
-	sp = NULL;
-	if (bash->s_cmd[i]->arguments[j][0] != '$')
-		sp = ft_split(bash->s_cmd[i]->arguments[j], '$');
+	af = after_dollar(bash->s_cmd[i]->arguments[j]);
 	if (c != -1)
 	{
 		free(bash->s_cmd[i]->arguments[j]);
-		if (sp && sp[0])
-			bash->s_cmd[i]->arguments[j] = ft_strjoin(sp[0], bash->path_env[c]->value);
+		if (af)
+			bash->s_cmd[i]->arguments[j] = ft_strjoin(af, bash->path_env[c]->value);
 		else
 			bash->s_cmd[i]->arguments[j] = ft_strdup(bash->path_env[c]->value);
 	}
