@@ -6,7 +6,7 @@
 /*   By: mozahnou <mozahnou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 08:28:24 by mozahnou          #+#    #+#             */
-/*   Updated: 2025/06/25 14:01:03 by mozahnou         ###   ########.fr       */
+/*   Updated: 2025/06/25 15:49:55 by mozahnou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,6 @@ void	select_struct(t_bash *bash, char *cmd, char **env)
 	expand_func(bash);
 }
 
-
-
 int	main(int ac, char **av, char **env)
 {
 	t_bash	*bash;
@@ -116,25 +114,6 @@ int	main(int ac, char **av, char **env)
 			break;
 		}
 		select_struct(bash, cmd, env);
-
-		// if(bash->s_cmd)
-		// {
-		// 	int i = 0;
-		// 	while(bash->s_cmd[i])
-		// 	{
-		// 		int j = 0;
-		// 		if (bash->s_cmd[i]->arguments)
-		// 		{
-		// 			while(bash->s_cmd[i]->arguments[j])
-		// 			{
-		// 				printf("%s\n", bash->s_cmd[i]->arguments[j]);
-		// 				// printf("env num %d type: %s\n", j, bash->s_cmd[i]->s_env[j]->value);
-		// 				j++;
-		// 			}
-		// 		}
-		// 		i++;
-			// }
-		// }
 		// free_bash(bash);
 	}
 }
